@@ -1,0 +1,11 @@
+{
+  "type": "json",
+  "intbools": [
+    1,
+    0,
+    1
+  ],
+  "strbool": "1",
+  "time": "2019-01-01",
+  "duration": "3s"
+}
