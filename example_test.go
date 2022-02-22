@@ -20,6 +20,8 @@ import (
 var k = koanf.New(".")
 
 func TestExample(t *testing.T) {
+	t.Parallel()
+
 	// Use the POSIX compliant zflag lib instead of Go's flag lib.
 	f := zflag.NewFlagSet("config", zflag.ContinueOnError)
 	f.Usage = func() {
@@ -46,7 +48,7 @@ func TestExample(t *testing.T) {
 	// Passing the Koanf instance to kozflag helps it deal with default command
 	// line flag values that are not present in conf maps from previously loaded
 	// providers.
-	if err := k.Load(kozflag.Provider(f, ".", k), nil); err != nil {
+	if err := k.Load(kozflag.Provider(f, ".", kozflag.WithKoanf(k)), nil); err != nil {
 		log.Fatalf("error loading config: %v", err)
 	}
 

@@ -16,6 +16,8 @@ func posflagCallback(key string, value string) (string, interface{}) {
 }
 
 func TestLoad(t *testing.T) {
+	t.Parallel()
+
 	assert := func(t *testing.T, k *koanf.Koanf) {
 		assertEq(t, k.String("key.one-example"), "val1")
 		assertEq(t, k.String("key.two_example"), "val2")
@@ -34,27 +36,27 @@ func TestLoad(t *testing.T) {
 	fs.Float64("key.float", 123.123, "")
 
 	k := koanf.New(".")
-	err := k.Load(kozflag.Provider(fs, ".", k), nil)
+	err := k.Load(kozflag.Provider(fs, ".", kozflag.WithKoanf(k)), nil)
 	assertNoErr(t, err)
 	assert(t, k)
 
 	// Test load with a custom flag callback.
 	k = koanf.New(".")
-	p := kozflag.ProviderWithFlag(fs, ".", k, func(f *zflag.Flag) (string, interface{}) {
-		return f.Name, kozflag.FlagVal(fs, f)
-	})
+	p := kozflag.Provider(fs, ".", kozflag.WithKoanf(k), kozflag.WithFlagCallback(func(f *zflag.Flag) (string, interface{}) {
+		return f.Name, kozflag.FlagVal(f)
+	}))
 	err = k.Load(p, nil)
 	assertNoErr(t, err)
 	assert(t, k)
 
 	// Test load with a custom key, val callback.
 	k = koanf.New(".")
-	p = kozflag.ProviderWithValue(fs, ".", k, func(key, val string) (string, interface{}) {
+	p = kozflag.Provider(fs, ".", kozflag.WithKoanf(k), kozflag.WithCallback(func(key, val string) (string, interface{}) {
 		if key == "key.float" {
 			return "", val
 		}
 		return key, val
-	})
+	}))
 	err = k.Load(p, nil)
 	assertNoErr(t, err)
 
@@ -66,6 +68,8 @@ func TestLoad(t *testing.T) {
 }
 
 func TestIssue90(t *testing.T) {
+	t.Parallel()
+
 	exampleKeys := map[string]interface{}{
 		"key.one_example": "a struct value",
 		"key.two_example": "b struct value",
@@ -80,13 +84,15 @@ func TestIssue90(t *testing.T) {
 	err := k.Load(confmap.Provider(exampleKeys, "."), nil)
 	assertNoErr(t, err)
 
-	err = k.Load(kozflag.ProviderWithValue(fs, ".", k, posflagCallback), nil)
+	err = k.Load(kozflag.Provider(fs, ".", kozflag.WithKoanf(k), kozflag.WithCallback(posflagCallback)), nil)
 	assertNoErr(t, err)
 
 	assertEq(t, exampleKeys, k.All())
 }
 
 func TestIssue100(t *testing.T) {
+	t.Parallel()
+
 	var err error
 	f := &zflag.FlagSet{}
 	f.StringToString("string", map[string]string{"k": "v"}, "")
@@ -95,7 +101,7 @@ func TestIssue100(t *testing.T) {
 
 	k := koanf.New(".")
 
-	err = k.Load(kozflag.Provider(f, ".", k), nil)
+	err = k.Load(kozflag.Provider(f, ".", kozflag.WithKoanf(k)), nil)
 
 	assertNoErr(t, err)
 
