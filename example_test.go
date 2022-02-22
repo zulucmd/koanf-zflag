@@ -32,7 +32,7 @@ func TestExample(t *testing.T) {
 	f.StringSlice("conf", []string{"example/conf.json"}, "path to one or more .toml config files")
 	f.String("time", "2020-01-01", "a time string")
 	f.String("type", "xxx", "type of the app")
-	f.Parse([]string{"--type", "hello world"})
+	_ = f.Parse([]string{"--type", "hello world"})
 
 	// Load the config files provided in the commandline.
 	cFiles, _ := f.GetStringSlice("conf")

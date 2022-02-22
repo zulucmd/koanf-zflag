@@ -23,8 +23,6 @@ linters:
     - gosimple
     - govet
     - misspell
-  disable:
-    - errcheck
 
 issues:
   exclude-rules:
