@@ -1,11 +1,11 @@
-// Package kozflag implements a koanf.Provider that reads commandline
-// parameters as conf maps using gowarden/zflag, a POSIX compliant
+// Package kzflag implements a koanf.Provider that reads commandline
+// parameters as conf maps using zulucmd/zflag, a POSIX compliant
 // alternative to Go's stdlib flag package.
-package kozflag
+package kzflag
 
 import (
-	"github.com/gowarden/zflag"
 	"github.com/knadh/koanf"
+	"github.com/zulucmd/zflag"
 )
 
 type Option func(f *KZFlag)

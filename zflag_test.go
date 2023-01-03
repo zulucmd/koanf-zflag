@@ -1,14 +1,14 @@
-package kozflag_test
+package kzflag_test
 
 import (
 	"reflect"
 	"strings"
 	"testing"
 
-	kozflag "github.com/gowarden/koanf-zflag"
-	"github.com/gowarden/zflag"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/providers/confmap"
+	kzflag "github.com/zulucmd/koanf-zflag"
+	"github.com/zulucmd/zflag"
 )
 
 func posflagCallback(key string, value string) (string, interface{}) {
@@ -36,14 +36,14 @@ func TestLoad(t *testing.T) {
 	fs.Float64("key.float", 123.123, "")
 
 	k := koanf.New(".")
-	err := k.Load(kozflag.Provider(fs, ".", kozflag.WithKoanf(k)), nil)
+	err := k.Load(kzflag.Provider(fs, ".", kzflag.WithKoanf(k)), nil)
 	assertNoErr(t, err)
 	assert(t, k)
 
 	// Test load with a custom flag callback.
 	k = koanf.New(".")
-	p := kozflag.Provider(fs, ".", kozflag.WithKoanf(k), kozflag.WithFlagCallback(func(f *zflag.Flag) (string, interface{}) {
-		return f.Name, kozflag.FlagVal(f)
+	p := kzflag.Provider(fs, ".", kzflag.WithKoanf(k), kzflag.WithFlagCallback(func(f *zflag.Flag) (string, interface{}) {
+		return f.Name, kzflag.FlagVal(f)
 	}))
 	err = k.Load(p, nil)
 	assertNoErr(t, err)
@@ -51,7 +51,7 @@ func TestLoad(t *testing.T) {
 
 	// Test load with a custom key, val callback.
 	k = koanf.New(".")
-	p = kozflag.Provider(fs, ".", kozflag.WithKoanf(k), kozflag.WithCallback(func(key, val string) (string, interface{}) {
+	p = kzflag.Provider(fs, ".", kzflag.WithKoanf(k), kzflag.WithCallback(func(key, val string) (string, interface{}) {
 		if key == "key.float" {
 			return "", val
 		}
@@ -84,7 +84,7 @@ func TestIssue90(t *testing.T) {
 	err := k.Load(confmap.Provider(exampleKeys, "."), nil)
 	assertNoErr(t, err)
 
-	err = k.Load(kozflag.Provider(fs, ".", kozflag.WithKoanf(k), kozflag.WithCallback(posflagCallback)), nil)
+	err = k.Load(kzflag.Provider(fs, ".", kzflag.WithKoanf(k), kzflag.WithCallback(posflagCallback)), nil)
 	assertNoErr(t, err)
 
 	assertEq(t, exampleKeys, k.All())
@@ -101,7 +101,7 @@ func TestIssue100(t *testing.T) {
 
 	k := koanf.New(".")
 
-	err = k.Load(kozflag.Provider(f, ".", kozflag.WithKoanf(k)), nil)
+	err = k.Load(kzflag.Provider(f, ".", kzflag.WithKoanf(k)), nil)
 
 	assertNoErr(t, err)
 

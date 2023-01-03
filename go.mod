@@ -1,9 +1,9 @@
-module github.com/gowarden/koanf-zflag
+module github.com/zulucmd/koanf-zflag
 
 go 1.17
 
 require (
-	github.com/gowarden/zflag v1.0.2
+	github.com/zulucmd/zflag v1.0.0
 	github.com/knadh/koanf v1.4.0
 )
 
@@ -15,4 +15,4 @@ require (
 	golang.org/x/sys v0.0.0-20200331124033-c3d80250170d // indirect
 )
 
-replace github.com/gowarden/zflag => ../zflag
+replace github.com/zulucmd/zflag => ../zflag

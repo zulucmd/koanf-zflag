@@ -1,14 +1,14 @@
-// Package kozflag implements a koanf.Provider that reads commandline
-// parameters as conf maps using gowarden/zflag, a POSIX compliant
+// Package kzflag implements a koanf.Provider that reads commandline
+// parameters as conf maps using zulucmd/zflag, a POSIX compliant
 // alternative to Go's stdlib flag package.
-package kozflag
+package kzflag
 
 import (
 	"errors"
 
-	"github.com/gowarden/zflag"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/maps"
+	"github.com/zulucmd/zflag"
 )
 
 // KZFlag implements a zflag command line provider.
@@ -65,14 +65,8 @@ func (p *KZFlag) Read() (map[string]interface{}, error) {
 
 		// If the default value of the flag was never changed by the user,
 		// it should not override the value in the conf map (if it exists in the first place).
-		if !f.Changed {
-			if p.ko != nil {
-				if p.ko.Exists(key) {
-					return
-				}
-			} else {
-				return
-			}
+		if !f.Changed && (p.ko == nil || p.ko.Exists(key)) {
+			return
 		}
 
 		// No callback. Use the key and value as-is.
@@ -82,7 +76,7 @@ func (p *KZFlag) Read() (map[string]interface{}, error) {
 	return maps.Unflatten(mp, p.delim), nil
 }
 
-// ReadBytes is not supported by the env koanf.
+// ReadBytes is not supported by the zflag provider.
 func (p *KZFlag) ReadBytes() ([]byte, error) {
 	return nil, errors.New("zflag provider does not support this method")
 }

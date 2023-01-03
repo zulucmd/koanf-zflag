@@ -1,9 +1,9 @@
 # Kaonf zflag Provider
 
-[![GoDoc](https://godoc.org/github.com/gowarden/koanf-zflag?status.svg)](https://godoc.org/github.com/gowarden/koanf-zflag)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gowarden/koanf-zflag)](https://goreportcard.com/report/github.com/gowarden/koanf-zflag)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/gowarden/koanf-zflag?sort=semver)](https://github.com/gowarden/koanf-zflag/releases)
-[![Build Status](https://github.com/gowarden/koanf-zflag/actions/workflows/validate.yml/badge.svg)](https://github.com/gowarden/koanf-zflag/actions/workflows/validate.yml)
+[![GoDoc](https://godoc.org/github.com/zulucmd/koanf-zflag?status.svg)](https://godoc.org/github.com/zulucmd/koanf-zflag)
+[![Go Report Card](https://goreportcard.com/badge/github.com/zulucmd/koanf-zflag)](https://goreportcard.com/report/github.com/zulucmd/koanf-zflag)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/zulucmd/koanf-zflag?sort=semver)](https://github.com/zulucmd/koanf-zflag/releases)
+[![Build Status](https://github.com/zulucmd/koanf-zflag/actions/workflows/validate.yml/badge.svg)](https://github.com/zulucmd/koanf-zflag/actions/workflows/validate.yml)
 
 <!-- toc -->
 
@@ -16,7 +16,7 @@
 
 ## Introduction
 
-koanf-zflag is a Koanf provider to retrieve configuration from [gowarden/zflag](https://github.com/gowarden/zflag).
+koanf-zflag is a Koanf provider to retrieve configuration from [zulucmd/zflag](https://github.com/zulucmd/zflag).
 
 ## Installation
 
@@ -25,14 +25,14 @@ koanf-zflag is available using the standard `go get` command.
 Install by running:
 
 ```bash
-go get github.com/gowarden/koanf-zflag
+go get github.com/zulucmd/koanf-zflag
 ```
 
 ## Documentation
 
 ### Reading from command line
 
-The following example shows the use of kozflag.Provider, a wrapper over the spf13/pflag library, an advanced commandline
+The following example shows the use of kzflag.Provider, a wrapper over the spf13/pflag library, an advanced commandline
 lib. For Go's built in flag package, use basicflag.Provider.
 
 ```go
@@ -43,8 +43,8 @@ import (
   "log"
   "os"
 
-  kozflag "github.com/gowarden/koanf-zflag"
-  "github.com/gowarden/zflag"
+  kzflag "github.com/zulucmd/koanf-zflag"
+  "github.com/zulucmd/zflag"
   "github.com/knadh/koanf"
   "github.com/knadh/koanf/parsers/json"
   "github.com/knadh/koanf/providers/file"
@@ -76,11 +76,11 @@ func main() {
 
   // "time" and "type" may have been loaded from the config file, but
   // they can still be overridden with the values from the command line.
-  // The bundled kozflag.Provider takes a flagset from the gorwarden/zflag lib.
-  // Passing the Koanf instance to kozflag helps it deal with default command
+  // The bundled kzflag.Provider takes a flagset from the gorwarden/zflag lib.
+  // Passing the Koanf instance to kzflag helps it deal with default command
   // line flag values that are not present in conf maps from previously loaded
   // providers.
-  if err := k.Load(kozflag.Provider(f, ".", k), nil); err != nil {
+  if err := k.Load(kzflag.Provider(f, ".", k), nil); err != nil {
     log.Fatalf("error loading config: %v", err)
   }
 

@@ -1,7 +1,7 @@
-// Package kozflag implements a koanf.Provider that reads commandline
-// parameters as conf maps using gowarden/zflag, a POSIX compliant
+// Package kzflag implements a koanf.Provider that reads commandline
+// parameters as conf maps using zulucmd/zflag, a POSIX compliant
 // alternative to Go's stdlib flag package.
-package kozflag_test
+package kzflag_test
 
 import (
 	"fmt"
@@ -9,11 +9,11 @@ import (
 	"os"
 	"testing"
 
-	kozflag "github.com/gowarden/koanf-zflag"
-	"github.com/gowarden/zflag"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/json"
 	"github.com/knadh/koanf/providers/file"
+	kzflag "github.com/zulucmd/koanf-zflag"
+	"github.com/zulucmd/zflag"
 )
 
 // Global koanf instance. Use "." as the key path delimiter. This can be "/" or any character.
@@ -44,11 +44,11 @@ func TestExample(t *testing.T) {
 
 	// "time" and "type" may have been loaded from the config file, but
 	// they can still be overridden with the values from the command line.
-	// The bundled kozflag.Provider takes a flagset from the gorwarden/zflag lib.
-	// Passing the Koanf instance to kozflag helps it deal with default command
+	// The bundled kzflag.Provider takes a flagset from the gorwarden/zflag lib.
+	// Passing the Koanf instance to kzflag helps it deal with default command
 	// line flag values that are not present in conf maps from previously loaded
 	// providers.
-	if err := k.Load(kozflag.Provider(f, ".", kozflag.WithKoanf(k)), nil); err != nil {
+	if err := k.Load(kzflag.Provider(f, ".", kzflag.WithKoanf(k)), nil); err != nil {
 		log.Fatalf("error loading config: %v", err)
 	}
 

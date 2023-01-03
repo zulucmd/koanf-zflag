@@ -58,7 +58,7 @@ jobs:
       - name: Setup go
         shell: bash
         run: |
-          curl -sL https://raw.githubusercontent.com/maxatome/install-go/v3.0/install-go.pl |
+          curl -sL https://raw.githubusercontent.com/maxatome/install-go/v3.3/install-go.pl |
               perl - ${{ matrix.go }} $HOME/go
       - name: Checkout code
         uses: actions/checkout@v2
