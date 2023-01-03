@@ -3,8 +3,8 @@ module github.com/zulucmd/koanf-zflag
 go 1.17
 
 require (
-	github.com/zulucmd/zflag v1.0.0
 	github.com/knadh/koanf v1.4.0
+	github.com/zulucmd/zflag v1.0.0
 )
 
 require (
