@@ -9,7 +9,6 @@ linters:
     - gas
     - revive
     - ineffassign
-    - interfacer
     - megacheck
     - staticcheck
     - errcheck
