@@ -14,5 +14,3 @@ require (
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	golang.org/x/sys v0.0.0-20200331124033-c3d80250170d // indirect
 )
-
-replace github.com/zulucmd/zflag => ../zflag
