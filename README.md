@@ -1,4 +1,4 @@
-# Kaonf zflag Provider
+# Koanf zflag Provider
 
 [![GoDoc](https://godoc.org/github.com/zulucmd/koanf-zflag?status.svg)](https://godoc.org/github.com/zulucmd/koanf-zflag)
 [![Go Report Card](https://goreportcard.com/badge/github.com/zulucmd/koanf-zflag)](https://goreportcard.com/report/github.com/zulucmd/koanf-zflag)
