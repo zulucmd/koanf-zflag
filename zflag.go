@@ -6,9 +6,10 @@ package kzflag
 import (
 	"errors"
 
-	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/maps"
-	"github.com/zulucmd/zflag"
+	"github.com/knadh/koanf/v2"
+
+	"github.com/zulucmd/zflag/v2"
 )
 
 // KZFlag implements a zflag command line provider.

@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/providers/confmap"
-	kzflag "github.com/zulucmd/koanf-zflag"
-	"github.com/zulucmd/zflag"
+	"github.com/knadh/koanf/v2"
+	kzflag "github.com/zulucmd/koanf-zflag/v2"
+	"github.com/zulucmd/zflag/v2"
 )
 
 func posflagCallback(key string, value string) (string, interface{}) {

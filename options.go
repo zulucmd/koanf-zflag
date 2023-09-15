@@ -4,8 +4,9 @@
 package kzflag
 
 import (
-	"github.com/knadh/koanf"
-	"github.com/zulucmd/zflag"
+	"github.com/knadh/koanf/v2"
+
+	"github.com/zulucmd/zflag/v2"
 )
 
 type Option func(f *KZFlag)
@@ -36,16 +37,16 @@ func WithCallback(cb func(key string, value string) (string, interface{})) Optio
 //
 // Example:
 //
-//  p := koanf_zflag.Provider(flagset, ".", ko, WithFlagCallback(func(f *zflag.Flag) (string, interface{})) {
-//      // Transform the key in whatever manner.
-//      key := f.Name
+//	p := koanf_zflag.Provider(flagset, ".", ko, WithFlagCallback(func(f *zflag.Flag) (string, interface{})) {
+//	    // Transform the key in whatever manner.
+//	    key := f.Name
 //
-//      // Use FlagVal() and then transform the value, or don't use it at all
-//      // and add custom logic to parse the value.
-//      val := koanf_zflag.FlagVal(flagset, f)
+//	    // Use FlagVal() and then transform the value, or don't use it at all
+//	    // and add custom logic to parse the value.
+//	    val := koanf_zflag.FlagVal(flagset, f)
 //
-//      return key, val
-//   }))
+//	    return key, val
+//	 }))
 func WithFlagCallback(cb func(f *zflag.Flag) (string, interface{})) Option {
 	return func(f *KZFlag) {
 		f.flagCB = cb

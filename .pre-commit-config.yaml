@@ -8,7 +8,7 @@ repos:
 
   - repo: https://github.com/golangci/golangci-lint
     # When updating this, also update .golangci.yml accordingly
-    rev: v1.47.0
+    rev: v1.51.2
     hooks:
       - id: golangci-lint
 
@@ -37,6 +37,11 @@ repos:
     hooks:
       - id: mdtoc
         name: Markdown Table of Contents
+        language: system
+        entry: go run sigs.k8s.io/mdtoc@latest --inplace
+        files: ^README.md$
+      - id: embed_files
+        name: Embed files into README
         language: system
         entry: go run sigs.k8s.io/mdtoc@latest --inplace
         files: ^README.md$

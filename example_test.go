@@ -9,11 +9,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/json"
 	"github.com/knadh/koanf/providers/file"
-	kzflag "github.com/zulucmd/koanf-zflag"
-	"github.com/zulucmd/zflag"
+	"github.com/knadh/koanf/v2"
+	kzflag "github.com/zulucmd/koanf-zflag/v2"
+
+	"github.com/zulucmd/zflag/v2"
 )
 
 // Global koanf instance. Use "." as the key path delimiter. This can be "/" or any character.
